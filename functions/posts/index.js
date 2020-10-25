@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
-const getTest = require("./getAllPosts")
+const getAllPosts = require("./getAllPosts")
 
-router.get("/posts", getTest)
+router.get("/", getAllPosts)
 
 const app = express()
 const cors = require("cors")
