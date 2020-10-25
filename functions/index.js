@@ -1,5 +1,7 @@
 const functions = require('firebase-functions');
-
+firebase.initializeApp({
+    storageBucket: "malork-kantoer.appspot.com",
+})
 
 const post = require("./post")
 const posts = require("./posts")
