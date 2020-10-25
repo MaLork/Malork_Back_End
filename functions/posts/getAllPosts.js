@@ -10,7 +10,7 @@ module.exports = async (req,res) => {
             let temp = doc.data();
             const {topic, user} = temp;
             const time = temp.time.toDate();
-            const havePickedAnswer = temp.pick!=0;
+            const havePickedAnswer = temp.pick!==0;
             data.push({
                 data: {
                     topic,
