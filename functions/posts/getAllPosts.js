@@ -3,7 +3,7 @@ const db = admin.firestore();
 
 module.exports = async (req,res) => {
     try {
-        const snapshot = await db.collection('user').get();
+        const snapshot = await db.collection('post').get();
         data = []
         snapshot.forEach((doc) => {
             console.log(doc.id, '=>', doc.data());
