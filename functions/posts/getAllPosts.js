@@ -29,7 +29,7 @@ module.exports = async (req,res) => {
     }
 }
 
-router.get("/posts/:id",(req,res)=>{
+router.get("/post/:id",(req,res)=>{
     try{
         const ID = req.params.id;
         //console.log(ID)
@@ -41,13 +41,12 @@ router.get("/posts/:id",(req,res)=>{
                 return res.json(doc.data())
             } else {
                 // doc.data() will be undefined in this case
-                console.log("No such document!");
+                throw console.log("No such document!");
             }
         }).catch(function(error) {
-            console.log("Error getting document:", error);
+            throw console.log("Error getting document:", error);
         });
     } catch (err) {
-        console.log(err)
         return res.status(500).send("error")
     }
 })
