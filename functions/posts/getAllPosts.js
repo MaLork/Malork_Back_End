@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
 const db = admin.firestore();
-const router = express.Router();
 
 module.exports = async (req,res) => {
     try {
