@@ -13,7 +13,8 @@ module.exports = async (req,res)=>{
             let pickedComment = null;
             snapshot.forEach(doc => {
                 let temp = doc.data();
-                const {content, user, time} = temp;
+                const {content, user} = temp;
+                const time = temp.time.toDate();
                 comments.push({content, user, time, commentId: doc.id})
                 if (doc.id == pickedId) {
                     pickedComment = {content, user, time, commentId: doc.id}
