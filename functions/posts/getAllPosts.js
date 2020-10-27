@@ -38,7 +38,7 @@ router.get("/posts/:id",(req,res)=>{
             // res.json(doc.data());
             if (doc.exists) {
                 //console.log("Document data:", doc.data());
-                res.json(doc.data())
+                return res.json(doc.data())
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
