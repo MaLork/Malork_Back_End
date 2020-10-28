@@ -6,7 +6,6 @@ module.exports = async (req,res) => {
         const snapshot = await db.collection('post').get();
         data = []
         snapshot.forEach((doc) => {
-            console.log(doc.id, '=>', doc.data());
             let temp = doc.data();
             const {topic, user} = temp;
             const time = temp.time.toDate();
