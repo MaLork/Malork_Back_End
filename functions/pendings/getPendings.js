@@ -10,12 +10,18 @@ module.exports = async (req,res) => {
         snapshot.forEach(doc => {
             const temp = doc.data();
             const {topic,user,status} = temp;
-            data.push({
+            const time = temp.time.toDate();
+            tempdata = {
                 topic,
                 user,
-                status
-            })
-            
+                status,
+                time,
+                id: doc.id
+            };
+            if(temp.postId) {
+                tempdata.postId = temp.postId;
+            }
+            data.push(tempdata)
         });
         return res.send(data)
     } catch (err) {

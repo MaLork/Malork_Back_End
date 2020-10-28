@@ -11,12 +11,10 @@ module.exports = async (req,res) => {
             const time = temp.time.toDate();
             const havePickedAnswer = temp.pick!==0;
             data.push({
-                data: {
-                    topic,
-                    user,
-                    time,
-                    havePickedAnswer
-                },
+                topic,
+                user,
+                time,
+                havePickedAnswer,
                 id: doc.id,
             })
           })
