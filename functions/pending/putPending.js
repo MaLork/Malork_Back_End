@@ -17,15 +17,16 @@ module.exports = async (req,res)=>{
                     const {content, topic, user, time} = temp;
                     const nowCom = 1;
                     const pick = 0;
+                    const approvedTime = admin.firestore.Timestamp.now()
                     const data = {
-                        content, topic, user, time, nowCom, pick
+                        content, topic, user, nowCom, pick, approvedTime, time
                     }
                     const statRef = db.collection("stats").doc("now"); 
                     const stat = await statRef.get();
                     const postId = stat.data().post;
                     const post = await db.collection("post").doc((postId).toString()).set(data);
                     const upId = await statRef.set({post: postId+1},{merge: true});
-                    const update = await docRef.set({status: "accepted"},{merge: true});
+                    const update = await docRef.set({status: "accepted",postId},{merge: true});
                     return res.send("Approved")
                 }else if(approve===false){
                     const update = await docRef.set({status: "rejected"},{merge: true})
@@ -40,6 +41,7 @@ module.exports = async (req,res)=>{
             return 0;
         }
     } catch (err) {
+        console.log(err)
         return res.status(500).send("error")
     }
 }

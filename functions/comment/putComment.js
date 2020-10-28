@@ -9,9 +9,13 @@ module.exports = async (req,res)=>{
         const doc = await docRef.get();
         const temp = doc.data();
         if (doc.exists) {
-            const upd = await docRef.set({pick: commentID},{merge: true});
-            
-            return res.send("Success")
+            if(temp.nowCom> commentID) {
+                const upd = await docRef.set({pick: commentID},{merge: true});
+                return res.send("Success")
+            }else{
+                console.log("No such comment!");
+                res.status(400).send("No such comment!");
+            }
         } else {
             console.log("No such document!");
             res.status(404).send("No such document!");
