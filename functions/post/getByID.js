@@ -14,12 +14,10 @@ module.exports = async (req,res)=>{
             const {content, topic, user} = temp;
             const time = temp.time.toDate();
             return res.json({
-                data: {
-                    topic,
-                    user,
-                    time,
-                    content
-                },
+                topic,
+                user,
+                time,
+                content,
                 id: doc.id,
             })
         } else {
@@ -28,6 +26,7 @@ module.exports = async (req,res)=>{
             throw console.log("No such document!");
         }
     } catch (err) {
+        console.log(err)
         return res.status(500).send("error")
     }
 }
