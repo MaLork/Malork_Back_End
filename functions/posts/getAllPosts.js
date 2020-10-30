@@ -5,7 +5,7 @@ module.exports = async (req,res) => {
     try {
         const stat = await db.collection("stats").doc("now").get(); 
         const postTol = stat.data().post;
-        const page = req.body.page;
+        const page = req.query.page;
         let snapshot;
         if (page > 1 && page !== null){
             if (postTol - (page-1)*10<1){
