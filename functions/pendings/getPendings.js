@@ -11,11 +11,13 @@ module.exports = async (req,res) => {
             const temp = doc.data();
             const {topic,user,status} = temp;
             const time = temp.time.toDate();
+            const content = temp.content.slice(0,50);
             tempdata = {
                 topic,
                 user,
                 status,
                 time,
+                content,
                 id: doc.id
             };
             if(temp.postId) {
