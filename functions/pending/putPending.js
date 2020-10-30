@@ -12,7 +12,7 @@ module.exports = async (req,res)=>{
                 res.status(403).send("Already decide");
                 return 0;
             }else{
-                let approve = req.body.approve;
+                const approve = req.body.approve;
                 if (approve===true) {
                     const {content, topic, user, time} = temp;
                     const nowCom = 1;
