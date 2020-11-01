@@ -7,7 +7,7 @@ const putComment = require("./putComment");
 const postComment = require("./postComment");
 
 router.get("/:id", getCommentById)
-router.put("/pick/:id", putComment);
+router.put("/pick/:id",checkAuth, putComment);
 router.post("/:id", checkAuth, postComment);
 
 const app = express()

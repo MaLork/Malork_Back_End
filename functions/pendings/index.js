@@ -5,9 +5,11 @@ const checkAuth = require("../helpers/checkAuth")
 
 const postPending = require("./postPending")
 const getPending = require("./getPendings")
+const getPendingAdmin = require("./getPendingAdmin")
 
-router.post("/",checkAuth, postPending)
-router.get("/",checkAuth, getPending)
+router.post("/",checkAuth, postPending);
+router.get("/",checkAuth, getPending);
+router.get("/admin",checkAuth, getPendingAdmin);
 
 const app = express()
 const cors = require("cors")
