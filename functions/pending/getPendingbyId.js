@@ -9,7 +9,7 @@ module.exports = async (req,res)=>{
         const uid = req.authId;
         const userDoc = await db.collection("users").doc(uid).get();
         if (docRef.exists) {
-            if(userDoc.data().admin || userDoc.data().uid === uid){
+            if(userDoc.data().admin || docRef.data().uid === uid){
                 const temp = docRef.data();
                 const {user,time,topic,content} = temp;
                 const timeConv = time.toDate();
