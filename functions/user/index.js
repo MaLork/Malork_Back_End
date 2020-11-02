@@ -3,11 +3,11 @@ const router = express.Router()
 
 const checkAuth = require("../helpers/checkAuth")
 
-const putPending = require("./putPending")
-const getPendingbyId = require("./getPendingbyId");
+const signup = require("./signup")
+const signin = require("./signin")
 
-router.put("/:id",checkAuth, putPending)
-router.get("/:id",checkAuth, getPendingbyId);
+router.post("/signup",checkAuth, signup);
+router.get("/signin",checkAuth, signin);
 
 const app = express()
 const cors = require("cors")

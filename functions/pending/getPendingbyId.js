@@ -6,17 +6,24 @@ module.exports = async (req,res)=>{
         const ID = req.params.id;
         //console.log(ID)
         const docRef = await db.collection("pending").doc(ID).get()
+        const uid = req.authId;
+        const userDoc = await db.collection("users").doc(uid).get();
         if (docRef.exists) {
-            const temp = docRef.data();
-            const {user,time,topic,content} = temp;
-            const timeConv = time.toDate();
-            return res.json({
-                user,
-                timeConv,
-                topic,
-                content
-            });
-            
+            if(userDoc.data().admin || docRef.data().uid === uid){
+                const temp = docRef.data();
+                const {user,time,topic,content} = temp;
+                const timeConv = time.toDate();
+                return res.json({
+                    user,
+                    timeConv,
+                    topic,
+                    content
+                });
+            }else{
+                res.status(401).send({
+                    error: "Unauthorized",
+                })
+            }
         } else {
             // doc.data() will be undefined in this case
             return res.status(404).send("No Post");

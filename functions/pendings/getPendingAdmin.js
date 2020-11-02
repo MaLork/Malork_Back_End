@@ -7,11 +7,11 @@ module.exports = async (req,res) => {
         //let data = req.body;
         const uid = req.authId;
         const userDoc = await db.collection("users").doc(uid).get();
-        const docRef = db.collection("pending").orderBy("time", "desc");
-        const snapshot = await docRef.get();
-        snapshot.forEach(doc => {
-            const temp = doc.data();
-            if(temp.uid===uid){
+        if(userDoc.data().admin === true){
+            const docRef = db.collection("pending").orderBy("time", "desc");
+            const snapshot = await docRef.get();
+            snapshot.forEach(doc => {
+                const temp = doc.data();
                 const {topic,user,status} = temp;
                 const time = temp.time.toDate();
                 const content = temp.content.slice(0,50);
@@ -27,9 +27,14 @@ module.exports = async (req,res) => {
                     tempdata.postId = temp.postId;
                 }
                 data.push(tempdata)
-            }
-        });
-        return res.send(data)
+            });
+            return res.send(data)
+        }else{
+            res.status(401).send({
+                error: "Unauthorized",
+            })
+        }
+       
     } catch (err) {
         res.status(500).send("Error")
         console.log(err);
